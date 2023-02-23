@@ -39,5 +39,5 @@ def main():
         op, user_id, username, score = line.split(' ')
         operate(op, int(user_id), username, int(score))
 
-if __name__=="__main__":
+if __name__== "__main__":
     main()

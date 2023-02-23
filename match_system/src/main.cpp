@@ -83,7 +83,7 @@ class Pool {
             return dt <= a_max_dif && dt <= b_max_dif;
         }
 
-        // match users version 2.0
+        // match users version 5.0
         void match()
         {
             for (uint32_t i = 0; i < users.size(); i ++)
