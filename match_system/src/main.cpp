@@ -216,11 +216,10 @@ void consume_task() {
         unique_lock<mutex> lck(message_queue.m);
         if(message_queue.q.empty())
         {
-            //队列中没有任务 等待其他线程操作(唤醒)
+            //队列中没有任务阻塞当前线程， 等待其他线程添加操作操作(唤醒)
             // message_queue.cv.wait(lck);
-            // 每一秒钟匹配一次
             lck.unlock();
-            pool.match();
+            pool.match();   //version 2.0: 每一秒匹配一次
             sleep(1);
         }
         else
