@@ -17,6 +17,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <vector>
+#include <unistd.h>
 
 using namespace ::apache::thrift;
 using namespace ::apache::thrift::protocol;
@@ -173,7 +174,11 @@ void consume_task() {
         if(message_queue.q.empty())
         {
             //队列中没有任务 等待其他线程操作(唤醒)
-            message_queue.cv.wait(lck);
+            // message_queue.cv.wait(lck);
+            // 每一秒钟匹配一次
+            lck.unlock();
+            pool.match();
+            sleep(1);
         }
         else
         {
@@ -186,7 +191,7 @@ void consume_task() {
             if (task.type == "add") pool.add(task.user);  //把user加入匹配池
             else if (task.type == "remove") pool.remove(task.user); //把user移出匹配池
 
-            pool.match(); //有user时，匹配
+          //  pool.match(); //有user时，匹配
         }
     }
 }
