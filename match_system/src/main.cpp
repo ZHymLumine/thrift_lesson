@@ -102,7 +102,7 @@ class Pool {
                         {
                             auto a = users[i], b = users[j];
                             users.erase(users.begin() + j);
-                            users.erase(users.end() + i);
+                            users.erase(users.begin() + i);
                             wt.erase(wt.begin() + j);
                             wt.erase(wt.begin() + i);
                             save_result(a.id, b.id);
@@ -132,7 +132,7 @@ class Pool {
             {
                 if (users[i].id == user.id)
                 {
-                    users.erase(users.begin() + i );
+                    users.erase(users.begin() + i);
                     wt.erase(wt.begin() + i);
                     break;
                 }
